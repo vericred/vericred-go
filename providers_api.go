@@ -32,9 +32,9 @@ func NewProvidersApiWithBasePath(basePath string) *ProvidersApi{
  * To retrieve a specific provider, just perform a GET using his NPI number
  * @param npi NPI number
  * @param vericredApiKey API Key
- * @return Provider
+ * @return ProviderShowResponse
  */
-func (a ProvidersApi) GetProvider (npi string, vericredApiKey string) (Provider, APIResponse, error) {
+func (a ProvidersApi) GetProvider (npi string, vericredApiKey string) (ProviderShowResponse, APIResponse, error) {
 
   var httpMethod = "Get"
  // create path and map variables
@@ -43,7 +43,7 @@ func (a ProvidersApi) GetProvider (npi string, vericredApiKey string) (Provider,
 
   // verify the required parameter 'npi' is set
   if &npi == nil {
-      return *new(Provider), *NewAPIResponseWithError("400 - Bad Request"), errors.New("Missing required parameter 'npi' when calling ProvidersApi->GetProvider")
+      return *new(ProviderShowResponse), *NewAPIResponseWithError("400 - Bad Request"), errors.New("Missing required parameter 'npi' when calling ProvidersApi->GetProvider")
   }
 
   headerParams := make(map[string]string)
@@ -80,7 +80,7 @@ func (a ProvidersApi) GetProvider (npi string, vericredApiKey string) (Provider,
     headerParams["Vericred-Api-Key"] = vericredApiKey
 
 
-  var successPayload = new(Provider)
+  var successPayload = new(ProviderShowResponse)
   httpResponse, err := a.Configuration.APIClient.CallAPI(path, httpMethod, postBody, headerParams, queryParams, formParams, fileName, fileBytes)
 
 

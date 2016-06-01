@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **GetProvider**
-> Provider GetProvider($npi, $vericredApiKey)
+> ProviderShowResponse GetProvider($npi, $vericredApiKey)
 
 Find a Provider
 
@@ -25,7 +25,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Provider**](Provider.md)
+[**ProviderShowResponse**](ProviderShowResponse.md)
 
 ### Authorization
 
