@@ -31,10 +31,9 @@ func NewProvidersApiWithBasePath(basePath string) *ProvidersApi{
  * Find a Provider
  * To retrieve a specific provider, just perform a GET using his NPI number
  * @param npi NPI number
- * @param vericredApiKey API Key
  * @return ProviderShowResponse
  */
-func (a ProvidersApi) GetProvider (npi string, vericredApiKey string) (ProviderShowResponse, APIResponse, error) {
+func (a ProvidersApi) GetProvider (npi string) (ProviderShowResponse, APIResponse, error) {
 
   var httpMethod = "Get"
  // create path and map variables
@@ -53,7 +52,12 @@ func (a ProvidersApi) GetProvider (npi string, vericredApiKey string) (ProviderS
   var fileName string
   var fileBytes []byte
 
+  // authentication (Vericred-Api-Key) required
   
+  // set key with prefix in header
+  headerParams["Vericred-Api-Key"] = a.Configuration.GetAPIKeyWithPrefix("Vericred-Api-Key")
+      
+
   // add default headers if any
   for key := range a.Configuration.DefaultHeader {
       headerParams[key] = a.Configuration.DefaultHeader[key]
@@ -76,8 +80,6 @@ func (a ProvidersApi) GetProvider (npi string, vericredApiKey string) (ProviderS
   if localVarHttpHeaderAccept != "" {  
       headerParams["Accept"] = localVarHttpHeaderAccept
   }
-    // header params "Vericred-Api-Key"
-    headerParams["Vericred-Api-Key"] = vericredApiKey
 
 
   var successPayload = new(ProviderShowResponse)
@@ -125,7 +127,12 @@ func (a ProvidersApi) GetProviders (body RequestProvidersSearch) (ProvidersSearc
   var fileName string
   var fileBytes []byte
 
+  // authentication (Vericred-Api-Key) required
   
+  // set key with prefix in header
+  headerParams["Vericred-Api-Key"] = a.Configuration.GetAPIKeyWithPrefix("Vericred-Api-Key")
+      
+
   // add default headers if any
   for key := range a.Configuration.DefaultHeader {
       headerParams[key] = a.Configuration.DefaultHeader[key]

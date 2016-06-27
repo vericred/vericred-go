@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **GetProvider**
-> ProviderShowResponse GetProvider($npi, $vericredApiKey)
+> ProviderShowResponse GetProvider($npi)
 
 Find a Provider
 
@@ -21,7 +21,6 @@ To retrieve a specific provider, just perform a GET using his NPI number
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **npi** | **string**| NPI number | 
- **vericredApiKey** | **string**| API Key | [optional] 
 
 ### Return type
 
@@ -29,7 +28,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Vericred-Api-Key](../README.md#Vericred-Api-Key)
 
 ### HTTP request headers
 
@@ -71,7 +70,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Vericred-Api-Key](../README.md#Vericred-Api-Key)
 
 ### HTTP request headers
 

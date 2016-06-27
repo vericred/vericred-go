@@ -33,7 +33,7 @@ func NewPlansApiWithBasePath(basePath string) *PlansApi{
 
 Searching for a set of plans requires a &#x60;zip_code&#x60; and &#x60;fips_code&#x60;
 code.  These are used to determine pricing and availabity
-of health plans.
+of health plans. This endpoint is paginated.
 
 Optionally, you may provide a list of Applicants or Providers
 
@@ -90,6 +90,14 @@ and return it for each plan.  If no values are provided, the
 
 &#x60;GET /plans?zip_code&#x3D;07451&amp;fips_code&#x3D;33025&amp;household_size&#x3D;4&amp;household_income&#x3D;40000&#x60;
 
+
+### Sorting
+
+Plans can be sorted by the &#x60;premium&#x60;, &#x60;carrier_name&#x60;, &#x60;level&#x60;, and &#x60;plan_type&#x60; fields,
+by either ascending (as &#x60;asc&#x60;) or descending (as &#x60;dsc) sort under the &#x60;sort&#x60; field.
+
+For example, to sort plans by level, the sort parameter would be &#x60;level:asc&#x60;.
+
  * @param body 
  * @return PlanSearchResponse
  */
@@ -107,7 +115,12 @@ func (a PlansApi) FindPlans (body RequestPlanFind) (PlanSearchResponse, APIRespo
   var fileName string
   var fileBytes []byte
 
+  // authentication (Vericred-Api-Key) required
   
+  // set key with prefix in header
+  headerParams["Vericred-Api-Key"] = a.Configuration.GetAPIKeyWithPrefix("Vericred-Api-Key")
+      
+
   // add default headers if any
   for key := range a.Configuration.DefaultHeader {
       headerParams[key] = a.Configuration.DefaultHeader[key]

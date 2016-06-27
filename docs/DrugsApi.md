@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **GetDrugCoverages**
-> DrugCoverageResponse GetDrugCoverages($ndcPackageCode, $audience, $stateCode, $vericredApiKey)
+> DrugCoverageResponse GetDrugCoverages($ndcPackageCode, $audience, $stateCode)
 
 Search for DrugCoverages
 
@@ -25,7 +25,6 @@ Name | Type | Description  | Notes
  **ndcPackageCode** | **string**| NDC package code | 
  **audience** | **string**| Two-character state code | 
  **stateCode** | **string**| Two-character state code | 
- **vericredApiKey** | **string**| API Key | [optional] 
 
 ### Return type
 
@@ -33,7 +32,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Vericred-Api-Key](../README.md#Vericred-Api-Key)
 
 ### HTTP request headers
 
@@ -43,7 +42,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListDrugs**
-> DrugSearchResponse ListDrugs($searchTerm, $vericredApiKey)
+> DrugSearchResponse ListDrugs($searchTerm)
 
 Drug Search
 
@@ -55,7 +54,6 @@ Search for drugs by proprietary name
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **searchTerm** | **string**| Full or partial proprietary name of drug | 
- **vericredApiKey** | **string**| API Key | [optional] 
 
 ### Return type
 
@@ -63,7 +61,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Vericred-Api-Key](../README.md#Vericred-Api-Key)
 
 ### HTTP request headers
 
