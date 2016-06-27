@@ -31,10 +31,9 @@ func NewZipCountiesApiWithBasePath(basePath string) *ZipCountiesApi{
  * Search for Zip Counties
  * Our &#x60;Plan&#x60; endpoints require a zip code and a fips (county) code.  This is because plan pricing requires both of these elements.  Users are unlikely to know their fips code, so we provide this endpoint to look up a &#x60;ZipCounty&#x60; by zip code and return both the selected zip and fips codes.
  * @param zipPrefix Partial five-digit Zip
- * @param vericredApiKey API Key
  * @return ZipCountyResponse
  */
-func (a ZipCountiesApi) GetZipCounties (zipPrefix string, vericredApiKey string) (ZipCountyResponse, APIResponse, error) {
+func (a ZipCountiesApi) GetZipCounties (zipPrefix string) (ZipCountyResponse, APIResponse, error) {
 
   var httpMethod = "Get"
  // create path and map variables
@@ -52,7 +51,12 @@ func (a ZipCountiesApi) GetZipCounties (zipPrefix string, vericredApiKey string)
   var fileName string
   var fileBytes []byte
 
+  // authentication (Vericred-Api-Key) required
   
+  // set key with prefix in header
+  headerParams["Vericred-Api-Key"] = a.Configuration.GetAPIKeyWithPrefix("Vericred-Api-Key")
+      
+
   // add default headers if any
   for key := range a.Configuration.DefaultHeader {
       headerParams[key] = a.Configuration.DefaultHeader[key]
@@ -76,8 +80,6 @@ func (a ZipCountiesApi) GetZipCounties (zipPrefix string, vericredApiKey string)
   if localVarHttpHeaderAccept != "" {  
       headerParams["Accept"] = localVarHttpHeaderAccept
   }
-    // header params "Vericred-Api-Key"
-    headerParams["Vericred-Api-Key"] = vericredApiKey
 
 
   var successPayload = new(ZipCountyResponse)

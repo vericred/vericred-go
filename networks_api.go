@@ -31,11 +31,13 @@ func NewNetworksApiWithBasePath(basePath string) *NetworksApi{
  * Networks
  * A network is a list of the doctors, other health care providers,
 and hospitals that a plan has contracted with to provide medical care to
-its members.
+its members. This endpoint is paginated.
  * @param carrierId Carrier HIOS Issuer ID
+ * @param page Page of paginated response
+ * @param perPage Responses per page
  * @return NetworkSearchResponse
  */
-func (a NetworksApi) ListNetworks (carrierId string) (NetworkSearchResponse, APIResponse, error) {
+func (a NetworksApi) ListNetworks (carrierId string, page int32, perPage int32) (NetworkSearchResponse, APIResponse, error) {
 
   var httpMethod = "Get"
  // create path and map variables
@@ -53,13 +55,20 @@ func (a NetworksApi) ListNetworks (carrierId string) (NetworkSearchResponse, API
   var fileName string
   var fileBytes []byte
 
+  // authentication (Vericred-Api-Key) required
   
+  // set key with prefix in header
+  headerParams["Vericred-Api-Key"] = a.Configuration.GetAPIKeyWithPrefix("Vericred-Api-Key")
+      
+
   // add default headers if any
   for key := range a.Configuration.DefaultHeader {
       headerParams[key] = a.Configuration.DefaultHeader[key]
   }
   
   queryParams["carrierId"] = a.Configuration.APIClient.ParameterToString(carrierId)
+  queryParams["page"] = a.Configuration.APIClient.ParameterToString(page)
+  queryParams["perPage"] = a.Configuration.APIClient.ParameterToString(perPage)
 
   // to determine the Content-Type header
   localVarHttpContentTypes := []string {

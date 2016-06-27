@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AdultDental** | **bool** | Does the plan provide dental coverage for adults? | [optional] [default to null]
+**Age29Rider** | **bool** |  | [optional] [default to null]
 **Ambulance** | **string** | Benefits string for ambulance coverage | [optional] [default to null]
 **BenefitsSummaryUrl** | **string** | Link to the summary of benefits and coverage (SBC) document. | [optional] [default to null]
 **BuyLink** | **string** | Link to a location to purchase the plan. | [optional] [default to null]
@@ -14,6 +15,7 @@ Name | Type | Description | Notes
 **CustomerServicePhoneNumber** | **string** | Phone number to contact the insurance carrier | [optional] [default to null]
 **DurableMedicalEquipment** | **string** | Benefits summary for durable medical equipment | [optional] [default to null]
 **DiagnosticTest** | **string** | Diagnostic tests benefit summary | [optional] [default to null]
+**DpRider** | **bool** | Is this a domestic plan? | [optional] [default to null]
 **DrugFormularyUrl** | **string** | Link to the summary of drug benefits for the plan | [optional] [default to null]
 **EffectiveDate** | **string** | Effective date of coverage. | [optional] [default to null]
 **ExpirationDate** | **string** | Expiration date of coverage. | [optional] [default to null]
@@ -22,6 +24,7 @@ Name | Type | Description | Notes
 **FamilyDrugMoop** | **string** | Maximum out-of-pocket for drugs when a family is on the plan | [optional] [default to null]
 **FamilyMedicalDeductible** | **string** | Deductible when a family is on the plan | [optional] [default to null]
 **FamilyMedicalMoop** | **string** | Maximum out-of-pocket when a family is on the plan | [optional] [default to null]
+**FpRider** | **bool** | Is this a family plan? | [optional] [default to null]
 **GenericDrugs** | **string** | Cost for generic drugs | [optional] [default to null]
 **HabilitationServices** | **string** | Habilitation services benefits summary | [optional] [default to null]
 **HiosIssuerId** | **string** |  | [optional] [default to null]

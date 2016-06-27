@@ -35,10 +35,9 @@ returns all DrugCoverages for a given Drug
  * @param ndcPackageCode NDC package code
  * @param audience Two-character state code
  * @param stateCode Two-character state code
- * @param vericredApiKey API Key
  * @return DrugCoverageResponse
  */
-func (a DrugsApi) GetDrugCoverages (ndcPackageCode string, audience string, stateCode string, vericredApiKey string) (DrugCoverageResponse, APIResponse, error) {
+func (a DrugsApi) GetDrugCoverages (ndcPackageCode string, audience string, stateCode string) (DrugCoverageResponse, APIResponse, error) {
 
   var httpMethod = "Get"
  // create path and map variables
@@ -65,7 +64,12 @@ func (a DrugsApi) GetDrugCoverages (ndcPackageCode string, audience string, stat
   var fileName string
   var fileBytes []byte
 
+  // authentication (Vericred-Api-Key) required
   
+  // set key with prefix in header
+  headerParams["Vericred-Api-Key"] = a.Configuration.GetAPIKeyWithPrefix("Vericred-Api-Key")
+      
+
   // add default headers if any
   for key := range a.Configuration.DefaultHeader {
       headerParams[key] = a.Configuration.DefaultHeader[key]
@@ -90,8 +94,6 @@ func (a DrugsApi) GetDrugCoverages (ndcPackageCode string, audience string, stat
   if localVarHttpHeaderAccept != "" {  
       headerParams["Accept"] = localVarHttpHeaderAccept
   }
-    // header params "Vericred-Api-Key"
-    headerParams["Vericred-Api-Key"] = vericredApiKey
 
 
   var successPayload = new(DrugCoverageResponse)
@@ -110,10 +112,9 @@ func (a DrugsApi) GetDrugCoverages (ndcPackageCode string, audience string, stat
  * Drug Search
  * Search for drugs by proprietary name
  * @param searchTerm Full or partial proprietary name of drug
- * @param vericredApiKey API Key
  * @return DrugSearchResponse
  */
-func (a DrugsApi) ListDrugs (searchTerm string, vericredApiKey string) (DrugSearchResponse, APIResponse, error) {
+func (a DrugsApi) ListDrugs (searchTerm string) (DrugSearchResponse, APIResponse, error) {
 
   var httpMethod = "Get"
  // create path and map variables
@@ -131,7 +132,12 @@ func (a DrugsApi) ListDrugs (searchTerm string, vericredApiKey string) (DrugSear
   var fileName string
   var fileBytes []byte
 
+  // authentication (Vericred-Api-Key) required
   
+  // set key with prefix in header
+  headerParams["Vericred-Api-Key"] = a.Configuration.GetAPIKeyWithPrefix("Vericred-Api-Key")
+      
+
   // add default headers if any
   for key := range a.Configuration.DefaultHeader {
       headerParams[key] = a.Configuration.DefaultHeader[key]
@@ -157,8 +163,6 @@ func (a DrugsApi) ListDrugs (searchTerm string, vericredApiKey string) (DrugSear
   if localVarHttpHeaderAccept != "" {  
       headerParams["Accept"] = localVarHttpHeaderAccept
   }
-    // header params "Vericred-Api-Key"
-    headerParams["Vericred-Api-Key"] = vericredApiKey
 
 
   var successPayload = new(DrugSearchResponse)

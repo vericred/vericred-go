@@ -7,6 +7,8 @@ import (
 type PlanSearchResult struct {
     // Does the plan provide dental coverage for adults?
     AdultDental  bool  `json:"adult_dental,omitempty"`
+    // 
+    Age29Rider  bool  `json:"age29_rider,omitempty"`
     // Benefits string for ambulance coverage
     Ambulance  string  `json:"ambulance,omitempty"`
     // Link to the summary of benefits and coverage (SBC) document.
@@ -27,6 +29,8 @@ type PlanSearchResult struct {
     DurableMedicalEquipment  string  `json:"durable_medical_equipment,omitempty"`
     // Diagnostic tests benefit summary
     DiagnosticTest  string  `json:"diagnostic_test,omitempty"`
+    // Is this a domestic plan?
+    DpRider  bool  `json:"dp_rider,omitempty"`
     // Link to the summary of drug benefits for the plan
     DrugFormularyUrl  string  `json:"drug_formulary_url,omitempty"`
     // Effective date of coverage.
@@ -43,6 +47,8 @@ type PlanSearchResult struct {
     FamilyMedicalDeductible  string  `json:"family_medical_deductible,omitempty"`
     // Maximum out-of-pocket when a family is on the plan
     FamilyMedicalMoop  string  `json:"family_medical_moop,omitempty"`
+    // Is this a family plan?
+    FpRider  bool  `json:"fp_rider,omitempty"`
     // Cost for generic drugs
     GenericDrugs  string  `json:"generic_drugs,omitempty"`
     // Habilitation services benefits summary
