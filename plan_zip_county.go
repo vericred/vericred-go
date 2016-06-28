@@ -129,17 +129,14 @@ The response would be
 
 package vericredclient
 
-type Drug struct {
+type PlanZipCounty struct {
 
-	// National Drug Code ID
-	Id string `json:"id,omitempty"`
+	// Foreign key to plan
+	PlanId int32 `json:"plan_id,omitempty"`
 
-	// Proprietary name of drug
-	ProprietaryName string `json:"proprietary_name,omitempty"`
+	// Foreign key to county
+	CountyId int32 `json:"county_id,omitempty"`
 
-	// Non-proprietary name of drug
-	NonProprietaryName string `json:"non_proprietary_name,omitempty"`
-
-	// Array of drug package Ids
-	DrugPackageIds []string `json:"drug_package_ids,omitempty"`
+	// Foreign key to zip code
+	ZipCodeId int32 `json:"zip_code_id,omitempty"`
 }
