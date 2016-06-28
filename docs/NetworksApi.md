@@ -8,13 +8,11 @@ Method | HTTP request | Description
 
 
 # **ListNetworks**
-> NetworkSearchResponse ListNetworks($carrierId)
+> NetworkSearchResponse ListNetworks($carrierId, $page, $perPage)
 
 Networks
 
-A network is a list of the doctors, other health care providers,
-and hospitals that a plan has contracted with to provide medical care to
-its members.
+A network is a list of the doctors, other health care providers, and hospitals that a plan has contracted with to provide medical care to its members. This endpoint is paginated.
 
 
 ### Parameters
@@ -22,6 +20,8 @@ its members.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **carrierId** | **string**| Carrier HIOS Issuer ID | 
+ **page** | **int32**| Page of paginated response | [optional] 
+ **perPage** | **int32**| Responses per page | [optional] 
 
 ### Return type
 
@@ -29,7 +29,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Vericred-Api-Key](../README.md#Vericred-Api-Key)
 
 ### HTTP request headers
 

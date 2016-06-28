@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **GetZipCounties**
-> ZipCountyResponse GetZipCounties($zipPrefix, $vericredApiKey)
+> ZipCountyResponse GetZipCounties($zipPrefix)
 
 Search for Zip Counties
 
@@ -20,7 +20,6 @@ Our `Plan` endpoints require a zip code and a fips (county) code.  This is becau
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **zipPrefix** | **string**| Partial five-digit Zip | 
- **vericredApiKey** | **string**| API Key | [optional] 
 
 ### Return type
 
@@ -28,7 +27,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Vericred-Api-Key](../README.md#Vericred-Api-Key)
 
 ### HTTP request headers
 
