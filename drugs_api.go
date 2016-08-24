@@ -130,21 +130,20 @@ The response would be
 package vericredclient
 
 import (
-	"strings"
-	"fmt"
-	"errors"
 	"net/url"
 	"encoding/json"
+	"fmt"
+	"strings"
 )
 
 type DrugsApi struct {
-	Configuration Configuration
+	Configuration *Configuration
 }
 
 func NewDrugsApi() *DrugsApi {
 	configuration := NewConfiguration()
 	return &DrugsApi{
-		Configuration: *configuration,
+		Configuration: configuration,
 	}
 }
 
@@ -153,7 +152,7 @@ func NewDrugsApiWithBasePath(basePath string) *DrugsApi {
 	configuration.BasePath = basePath
 
 	return &DrugsApi{
-		Configuration: *configuration,
+		Configuration: configuration,
 	}
 }
 
@@ -168,41 +167,26 @@ func NewDrugsApiWithBasePath(basePath string) *DrugsApi {
  */
 func (a DrugsApi) GetDrugCoverages(ndcPackageCode string, audience string, stateCode string) (*DrugCoverageResponse, *APIResponse, error) {
 
-	var httpMethod = "Get"
+	var localVarHttpMethod = "Get"
 	// create path and map variables
-	path := a.Configuration.BasePath + "/drug_packages/{ndc_package_code}/coverages"
-	path = strings.Replace(path, "{"+"ndc_package_code"+"}", fmt.Sprintf("%v", ndcPackageCode), -1)
+	localVarPath := a.Configuration.BasePath + "/drug_packages/{ndc_package_code}/coverages"
+	localVarPath = strings.Replace(localVarPath, "{"+"ndc_package_code"+"}", fmt.Sprintf("%v", ndcPackageCode), -1)
 
-	// verify the required parameter 'ndcPackageCode' is set
-	if &ndcPackageCode == nil {
-		return new(DrugCoverageResponse), nil, errors.New("Missing required parameter 'ndcPackageCode' when calling DrugsApi->GetDrugCoverages")
-	}
-	// verify the required parameter 'audience' is set
-	if &audience == nil {
-		return new(DrugCoverageResponse), nil, errors.New("Missing required parameter 'audience' when calling DrugsApi->GetDrugCoverages")
-	}
-	// verify the required parameter 'stateCode' is set
-	if &stateCode == nil {
-		return new(DrugCoverageResponse), nil, errors.New("Missing required parameter 'stateCode' when calling DrugsApi->GetDrugCoverages")
-	}
-
-	headerParams := make(map[string]string)
-	queryParams := url.Values{}
-	formParams := make(map[string]string)
-	var postBody interface{}
-	var fileName string
-	var fileBytes []byte
-	// authentication (Vericred-Api-Key) required
-
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := make(map[string]string)
+	var localVarPostBody interface{}
+	var localVarFileName string
+	var localVarFileBytes []byte
+	// authentication '(Vericred-Api-Key)' required
 	// set key with prefix in header
-	headerParams["Vericred-Api-Key"] = a.Configuration.GetAPIKeyWithPrefix("Vericred-Api-Key")
-
+	localVarHeaderParams["Vericred-Api-Key"] = a.Configuration.GetAPIKeyWithPrefix("Vericred-Api-Key")
 	// add default headers if any
 	for key := range a.Configuration.DefaultHeader {
-		headerParams[key] = a.Configuration.DefaultHeader[key]
+		localVarHeaderParams[key] = a.Configuration.DefaultHeader[key]
 	}
-		queryParams.Add("audience", a.Configuration.APIClient.ParameterToString(audience, ""))
-			queryParams.Add("stateCode", a.Configuration.APIClient.ParameterToString(stateCode, ""))
+		localVarQueryParams.Add("audience", a.Configuration.APIClient.ParameterToString(audience, ""))
+			localVarQueryParams.Add("state_code", a.Configuration.APIClient.ParameterToString(stateCode, ""))
 	
 
 	// to determine the Content-Type header
@@ -211,7 +195,7 @@ func (a DrugsApi) GetDrugCoverages(ndcPackageCode string, audience string, state
 	// set Content-Type header
 	localVarHttpContentType := a.Configuration.APIClient.SelectHeaderContentType(localVarHttpContentTypes)
 	if localVarHttpContentType != "" {
-		headerParams["Content-Type"] = localVarHttpContentType
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
 	}
 	// to determine the Accept header
 	localVarHttpHeaderAccepts := []string{
@@ -220,15 +204,16 @@ func (a DrugsApi) GetDrugCoverages(ndcPackageCode string, audience string, state
 	// set Accept header
 	localVarHttpHeaderAccept := a.Configuration.APIClient.SelectHeaderAccept(localVarHttpHeaderAccepts)
 	if localVarHttpHeaderAccept != "" {
-		headerParams["Accept"] = localVarHttpHeaderAccept
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
+
 	var successPayload = new(DrugCoverageResponse)
-	httpResponse, err := a.Configuration.APIClient.CallAPI(path, httpMethod, postBody, headerParams, queryParams, formParams, fileName, fileBytes)
+	localVarHttpResponse, err := a.Configuration.APIClient.CallAPI(localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return successPayload, NewAPIResponse(httpResponse.RawResponse), err
+		return successPayload, NewAPIResponse(localVarHttpResponse.RawResponse), err
 	}
-	err = json.Unmarshal(httpResponse.Body(), &successPayload)
-	return successPayload, NewAPIResponse(httpResponse.RawResponse), err
+	err = json.Unmarshal(localVarHttpResponse.Body(), &successPayload)
+	return successPayload, NewAPIResponse(localVarHttpResponse.RawResponse), err
 }
 
 /**
@@ -240,31 +225,24 @@ func (a DrugsApi) GetDrugCoverages(ndcPackageCode string, audience string, state
  */
 func (a DrugsApi) ListDrugs(searchTerm string) (*DrugSearchResponse, *APIResponse, error) {
 
-	var httpMethod = "Get"
+	var localVarHttpMethod = "Get"
 	// create path and map variables
-	path := a.Configuration.BasePath + "/drugs"
+	localVarPath := a.Configuration.BasePath + "/drugs"
 
-	// verify the required parameter 'searchTerm' is set
-	if &searchTerm == nil {
-		return new(DrugSearchResponse), nil, errors.New("Missing required parameter 'searchTerm' when calling DrugsApi->ListDrugs")
-	}
-
-	headerParams := make(map[string]string)
-	queryParams := url.Values{}
-	formParams := make(map[string]string)
-	var postBody interface{}
-	var fileName string
-	var fileBytes []byte
-	// authentication (Vericred-Api-Key) required
-
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := make(map[string]string)
+	var localVarPostBody interface{}
+	var localVarFileName string
+	var localVarFileBytes []byte
+	// authentication '(Vericred-Api-Key)' required
 	// set key with prefix in header
-	headerParams["Vericred-Api-Key"] = a.Configuration.GetAPIKeyWithPrefix("Vericred-Api-Key")
-
+	localVarHeaderParams["Vericred-Api-Key"] = a.Configuration.GetAPIKeyWithPrefix("Vericred-Api-Key")
 	// add default headers if any
 	for key := range a.Configuration.DefaultHeader {
-		headerParams[key] = a.Configuration.DefaultHeader[key]
+		localVarHeaderParams[key] = a.Configuration.DefaultHeader[key]
 	}
-		queryParams.Add("searchTerm", a.Configuration.APIClient.ParameterToString(searchTerm, ""))
+		localVarQueryParams.Add("search_term", a.Configuration.APIClient.ParameterToString(searchTerm, ""))
 	
 
 	// to determine the Content-Type header
@@ -273,7 +251,7 @@ func (a DrugsApi) ListDrugs(searchTerm string) (*DrugSearchResponse, *APIRespons
 	// set Content-Type header
 	localVarHttpContentType := a.Configuration.APIClient.SelectHeaderContentType(localVarHttpContentTypes)
 	if localVarHttpContentType != "" {
-		headerParams["Content-Type"] = localVarHttpContentType
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
 	}
 	// to determine the Accept header
 	localVarHttpHeaderAccepts := []string{
@@ -283,14 +261,15 @@ func (a DrugsApi) ListDrugs(searchTerm string) (*DrugSearchResponse, *APIRespons
 	// set Accept header
 	localVarHttpHeaderAccept := a.Configuration.APIClient.SelectHeaderAccept(localVarHttpHeaderAccepts)
 	if localVarHttpHeaderAccept != "" {
-		headerParams["Accept"] = localVarHttpHeaderAccept
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
+
 	var successPayload = new(DrugSearchResponse)
-	httpResponse, err := a.Configuration.APIClient.CallAPI(path, httpMethod, postBody, headerParams, queryParams, formParams, fileName, fileBytes)
+	localVarHttpResponse, err := a.Configuration.APIClient.CallAPI(localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return successPayload, NewAPIResponse(httpResponse.RawResponse), err
+		return successPayload, NewAPIResponse(localVarHttpResponse.RawResponse), err
 	}
-	err = json.Unmarshal(httpResponse.Body(), &successPayload)
-	return successPayload, NewAPIResponse(httpResponse.RawResponse), err
+	err = json.Unmarshal(localVarHttpResponse.Body(), &successPayload)
+	return successPayload, NewAPIResponse(localVarHttpResponse.RawResponse), err
 }
 

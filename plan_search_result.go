@@ -167,6 +167,9 @@ type PlanSearchResult struct {
 	// Diagnostic tests benefit summary
 	DiagnosticTest string `json:"diagnostic_test,omitempty"`
 
+	// Alternate name for the Plan
+	DisplayName string `json:"display_name,omitempty"`
+
 	// Is this a domestic plan?
 	DpRider bool `json:"dp_rider,omitempty"`
 
@@ -211,6 +214,9 @@ type PlanSearchResult struct {
 
 	// Hospice service benefits summary
 	HospiceService string `json:"hospice_service,omitempty"`
+
+	// Is the plan HSA eligible?
+	HsaEligible bool `json:"hsa_eligible,omitempty"`
 
 	// Government-issued HIOS plan ID
 	Id string `json:"id,omitempty"`
@@ -310,6 +316,9 @@ type PlanSearchResult struct {
 
 	// Benefits summary for rehabilitation services
 	RehabilitationServices string `json:"rehabilitation_services,omitempty"`
+
+	// Foreign key for service area
+	ServiceAreaId string `json:"service_area_id,omitempty"`
 
 	// Benefits summary for skilled nursing services
 	SkilledNursing string `json:"skilled_nursing,omitempty"`

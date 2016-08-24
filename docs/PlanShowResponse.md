@@ -1,11 +1,9 @@
-# PlanZipCounty
+# PlanShowResponse
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PlanId** | **int32** | Foreign key to plan | [optional] [default to null]
-**CountyId** | **int32** | Foreign key to county | [optional] [default to null]
-**ZipCodeId** | **int32** | Foreign key to zip code | [optional] [default to null]
+**Plan** | [**Plan**](Plan.md) | Plan response | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

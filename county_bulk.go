@@ -139,4 +139,10 @@ type CountyBulk struct {
 
 	// State code
 	StateId string `json:"state_id,omitempty"`
+
+	// Count of unique rating areas in the county
+	RatingAreaCount string `json:"rating_area_count,omitempty"`
+
+	// Count of unique service areas in the county
+	ServiceAreaCount string `json:"service_area_count,omitempty"`
 }
