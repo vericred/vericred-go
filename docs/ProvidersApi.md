@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **GetProvider**
-> ProviderShowResponse GetProvider($npi)
+> ProviderShowResponse GetProvider($npi, $year, $state)
 
 Find a Provider
 
@@ -21,6 +21,8 @@ To retrieve a specific provider, just perform a GET using his NPI number
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **npi** | **string**| NPI number | 
+ **year** | **string**| Only show plan ids for the given year | [optional] 
+ **state** | **string**| Only show plan ids for the given state | [optional] 
 
 ### Return type
 

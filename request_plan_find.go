@@ -138,7 +138,7 @@ type RequestPlanFind struct {
 	EnrollmentDate string `json:"enrollment_date,omitempty"`
 
 	// National Drug Code Package Id
-	DrugPackages []DrugPackage `json:"drug_packages,omitempty"`
+	DrugPackages []RequestPlanFindDrugPackage `json:"drug_packages,omitempty"`
 
 	// County code to determine eligibility
 	FipsCode string `json:"fips_code,omitempty"`
@@ -148,6 +148,9 @@ type RequestPlanFind struct {
 
 	// Number of people living in household.
 	HouseholdSize int32 `json:"household_size,omitempty"`
+
+	// List of plan IDs to filter by
+	Ids []int32 `json:"ids,omitempty"`
 
 	// Type of plan to search for.
 	Market string `json:"market,omitempty"`

@@ -130,21 +130,18 @@ The response would be
 package vericredclient
 
 import (
-	"strings"
-	"fmt"
-	"errors"
 	"net/url"
 	"encoding/json"
 )
 
 type PlansApi struct {
-	Configuration Configuration
+	Configuration *Configuration
 }
 
 func NewPlansApi() *PlansApi {
 	configuration := NewConfiguration()
 	return &PlansApi{
-		Configuration: *configuration,
+		Configuration: configuration,
 	}
 }
 
@@ -153,7 +150,7 @@ func NewPlansApiWithBasePath(basePath string) *PlansApi {
 	configuration.BasePath = basePath
 
 	return &PlansApi{
-		Configuration: *configuration,
+		Configuration: configuration,
 	}
 }
 
@@ -166,25 +163,22 @@ func NewPlansApiWithBasePath(basePath string) *PlansApi {
  */
 func (a PlansApi) FindPlans(body RequestPlanFind) (*PlanSearchResponse, *APIResponse, error) {
 
-	var httpMethod = "Post"
+	var localVarHttpMethod = "Post"
 	// create path and map variables
-	path := a.Configuration.BasePath + "/plans/search"
+	localVarPath := a.Configuration.BasePath + "/plans/search"
 
-
-	headerParams := make(map[string]string)
-	queryParams := url.Values{}
-	formParams := make(map[string]string)
-	var postBody interface{}
-	var fileName string
-	var fileBytes []byte
-	// authentication (Vericred-Api-Key) required
-
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := make(map[string]string)
+	var localVarPostBody interface{}
+	var localVarFileName string
+	var localVarFileBytes []byte
+	// authentication '(Vericred-Api-Key)' required
 	// set key with prefix in header
-	headerParams["Vericred-Api-Key"] = a.Configuration.GetAPIKeyWithPrefix("Vericred-Api-Key")
-
+	localVarHeaderParams["Vericred-Api-Key"] = a.Configuration.GetAPIKeyWithPrefix("Vericred-Api-Key")
 	// add default headers if any
 	for key := range a.Configuration.DefaultHeader {
-		headerParams[key] = a.Configuration.DefaultHeader[key]
+		localVarHeaderParams[key] = a.Configuration.DefaultHeader[key]
 	}
 
 
@@ -194,7 +188,7 @@ func (a PlansApi) FindPlans(body RequestPlanFind) (*PlanSearchResponse, *APIResp
 	// set Content-Type header
 	localVarHttpContentType := a.Configuration.APIClient.SelectHeaderContentType(localVarHttpContentTypes)
 	if localVarHttpContentType != "" {
-		headerParams["Content-Type"] = localVarHttpContentType
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
 	}
 	// to determine the Accept header
 	localVarHttpHeaderAccepts := []string{
@@ -203,17 +197,74 @@ func (a PlansApi) FindPlans(body RequestPlanFind) (*PlanSearchResponse, *APIResp
 	// set Accept header
 	localVarHttpHeaderAccept := a.Configuration.APIClient.SelectHeaderAccept(localVarHttpHeaderAccepts)
 	if localVarHttpHeaderAccept != "" {
-		headerParams["Accept"] = localVarHttpHeaderAccept
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
 	// body params
-	postBody = &body
+	localVarPostBody = &body
 
 	var successPayload = new(PlanSearchResponse)
-	httpResponse, err := a.Configuration.APIClient.CallAPI(path, httpMethod, postBody, headerParams, queryParams, formParams, fileName, fileBytes)
+	localVarHttpResponse, err := a.Configuration.APIClient.CallAPI(localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return successPayload, NewAPIResponse(httpResponse.RawResponse), err
+		return successPayload, NewAPIResponse(localVarHttpResponse.RawResponse), err
 	}
-	err = json.Unmarshal(httpResponse.Body(), &successPayload)
-	return successPayload, NewAPIResponse(httpResponse.RawResponse), err
+	err = json.Unmarshal(localVarHttpResponse.Body(), &successPayload)
+	return successPayload, NewAPIResponse(localVarHttpResponse.RawResponse), err
+}
+
+/**
+ * Show Plan
+ * Show the details of an individual Plan.  This includes deductibles, maximums out of pocket, and co-pay/coinsurance for benefits
+ *
+ * @param year Plan year (defaults to current year)
+ * @return *PlanShowResponse
+ */
+func (a PlansApi) ShowPlan(year int32) (*PlanShowResponse, *APIResponse, error) {
+
+	var localVarHttpMethod = "Get"
+	// create path and map variables
+	localVarPath := a.Configuration.BasePath + "/plans/{id}"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := make(map[string]string)
+	var localVarPostBody interface{}
+	var localVarFileName string
+	var localVarFileBytes []byte
+	// authentication '(Vericred-Api-Key)' required
+	// set key with prefix in header
+	localVarHeaderParams["Vericred-Api-Key"] = a.Configuration.GetAPIKeyWithPrefix("Vericred-Api-Key")
+	// add default headers if any
+	for key := range a.Configuration.DefaultHeader {
+		localVarHeaderParams[key] = a.Configuration.DefaultHeader[key]
+	}
+		localVarQueryParams.Add("year", a.Configuration.APIClient.ParameterToString(year, ""))
+	
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{ "application/json",  }
+
+	// set Content-Type header
+	localVarHttpContentType := a.Configuration.APIClient.SelectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{
+		"application/json",
+	}
+
+	// set Accept header
+	localVarHttpHeaderAccept := a.Configuration.APIClient.SelectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+
+	var successPayload = new(PlanShowResponse)
+	localVarHttpResponse, err := a.Configuration.APIClient.CallAPI(localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return successPayload, NewAPIResponse(localVarHttpResponse.RawResponse), err
+	}
+	err = json.Unmarshal(localVarHttpResponse.Body(), &successPayload)
+	return successPayload, NewAPIResponse(localVarHttpResponse.RawResponse), err
 }
 

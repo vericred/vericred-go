@@ -137,6 +137,9 @@ type RequestProvidersSearch struct {
 	// List of HIOS ids
 	HiosIds []string `json:"hios_ids,omitempty"`
 
+	// Minimum search threshold to be included in the results
+	MinScore float32 `json:"min_score,omitempty"`
+
 	// Page number
 	Page int32 `json:"page,omitempty"`
 

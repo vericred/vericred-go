@@ -130,21 +130,18 @@ The response would be
 package vericredclient
 
 import (
-	"strings"
-	"fmt"
-	"errors"
 	"net/url"
 	"encoding/json"
 )
 
 type NetworksApi struct {
-	Configuration Configuration
+	Configuration *Configuration
 }
 
 func NewNetworksApi() *NetworksApi {
 	configuration := NewConfiguration()
 	return &NetworksApi{
-		Configuration: *configuration,
+		Configuration: configuration,
 	}
 }
 
@@ -153,7 +150,7 @@ func NewNetworksApiWithBasePath(basePath string) *NetworksApi {
 	configuration.BasePath = basePath
 
 	return &NetworksApi{
-		Configuration: *configuration,
+		Configuration: configuration,
 	}
 }
 
@@ -168,33 +165,26 @@ func NewNetworksApiWithBasePath(basePath string) *NetworksApi {
  */
 func (a NetworksApi) ListNetworks(carrierId string, page int32, perPage int32) (*NetworkSearchResponse, *APIResponse, error) {
 
-	var httpMethod = "Get"
+	var localVarHttpMethod = "Get"
 	// create path and map variables
-	path := a.Configuration.BasePath + "/networks"
+	localVarPath := a.Configuration.BasePath + "/networks"
 
-	// verify the required parameter 'carrierId' is set
-	if &carrierId == nil {
-		return new(NetworkSearchResponse), nil, errors.New("Missing required parameter 'carrierId' when calling NetworksApi->ListNetworks")
-	}
-
-	headerParams := make(map[string]string)
-	queryParams := url.Values{}
-	formParams := make(map[string]string)
-	var postBody interface{}
-	var fileName string
-	var fileBytes []byte
-	// authentication (Vericred-Api-Key) required
-
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := make(map[string]string)
+	var localVarPostBody interface{}
+	var localVarFileName string
+	var localVarFileBytes []byte
+	// authentication '(Vericred-Api-Key)' required
 	// set key with prefix in header
-	headerParams["Vericred-Api-Key"] = a.Configuration.GetAPIKeyWithPrefix("Vericred-Api-Key")
-
+	localVarHeaderParams["Vericred-Api-Key"] = a.Configuration.GetAPIKeyWithPrefix("Vericred-Api-Key")
 	// add default headers if any
 	for key := range a.Configuration.DefaultHeader {
-		headerParams[key] = a.Configuration.DefaultHeader[key]
+		localVarHeaderParams[key] = a.Configuration.DefaultHeader[key]
 	}
-		queryParams.Add("carrierId", a.Configuration.APIClient.ParameterToString(carrierId, ""))
-			queryParams.Add("page", a.Configuration.APIClient.ParameterToString(page, ""))
-			queryParams.Add("perPage", a.Configuration.APIClient.ParameterToString(perPage, ""))
+		localVarQueryParams.Add("carrier_id", a.Configuration.APIClient.ParameterToString(carrierId, ""))
+			localVarQueryParams.Add("page", a.Configuration.APIClient.ParameterToString(page, ""))
+			localVarQueryParams.Add("per_page", a.Configuration.APIClient.ParameterToString(perPage, ""))
 	
 
 	// to determine the Content-Type header
@@ -203,7 +193,7 @@ func (a NetworksApi) ListNetworks(carrierId string, page int32, perPage int32) (
 	// set Content-Type header
 	localVarHttpContentType := a.Configuration.APIClient.SelectHeaderContentType(localVarHttpContentTypes)
 	if localVarHttpContentType != "" {
-		headerParams["Content-Type"] = localVarHttpContentType
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
 	}
 	// to determine the Accept header
 	localVarHttpHeaderAccepts := []string{
@@ -213,14 +203,15 @@ func (a NetworksApi) ListNetworks(carrierId string, page int32, perPage int32) (
 	// set Accept header
 	localVarHttpHeaderAccept := a.Configuration.APIClient.SelectHeaderAccept(localVarHttpHeaderAccepts)
 	if localVarHttpHeaderAccept != "" {
-		headerParams["Accept"] = localVarHttpHeaderAccept
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
+
 	var successPayload = new(NetworkSearchResponse)
-	httpResponse, err := a.Configuration.APIClient.CallAPI(path, httpMethod, postBody, headerParams, queryParams, formParams, fileName, fileBytes)
+	localVarHttpResponse, err := a.Configuration.APIClient.CallAPI(localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return successPayload, NewAPIResponse(httpResponse.RawResponse), err
+		return successPayload, NewAPIResponse(localVarHttpResponse.RawResponse), err
 	}
-	err = json.Unmarshal(httpResponse.Body(), &successPayload)
-	return successPayload, NewAPIResponse(httpResponse.RawResponse), err
+	err = json.Unmarshal(localVarHttpResponse.Body(), &successPayload)
+	return successPayload, NewAPIResponse(localVarHttpResponse.RawResponse), err
 }
 

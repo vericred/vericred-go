@@ -130,21 +130,18 @@ The response would be
 package vericredclient
 
 import (
-	"strings"
-	"fmt"
-	"errors"
 	"net/url"
 	"encoding/json"
 )
 
 type ZipCountiesApi struct {
-	Configuration Configuration
+	Configuration *Configuration
 }
 
 func NewZipCountiesApi() *ZipCountiesApi {
 	configuration := NewConfiguration()
 	return &ZipCountiesApi{
-		Configuration: *configuration,
+		Configuration: configuration,
 	}
 }
 
@@ -153,7 +150,7 @@ func NewZipCountiesApiWithBasePath(basePath string) *ZipCountiesApi {
 	configuration.BasePath = basePath
 
 	return &ZipCountiesApi{
-		Configuration: *configuration,
+		Configuration: configuration,
 	}
 }
 
@@ -166,31 +163,24 @@ func NewZipCountiesApiWithBasePath(basePath string) *ZipCountiesApi {
  */
 func (a ZipCountiesApi) GetZipCounties(zipPrefix string) (*ZipCountyResponse, *APIResponse, error) {
 
-	var httpMethod = "Get"
+	var localVarHttpMethod = "Get"
 	// create path and map variables
-	path := a.Configuration.BasePath + "/zip_counties"
+	localVarPath := a.Configuration.BasePath + "/zip_counties"
 
-	// verify the required parameter 'zipPrefix' is set
-	if &zipPrefix == nil {
-		return new(ZipCountyResponse), nil, errors.New("Missing required parameter 'zipPrefix' when calling ZipCountiesApi->GetZipCounties")
-	}
-
-	headerParams := make(map[string]string)
-	queryParams := url.Values{}
-	formParams := make(map[string]string)
-	var postBody interface{}
-	var fileName string
-	var fileBytes []byte
-	// authentication (Vericred-Api-Key) required
-
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := make(map[string]string)
+	var localVarPostBody interface{}
+	var localVarFileName string
+	var localVarFileBytes []byte
+	// authentication '(Vericred-Api-Key)' required
 	// set key with prefix in header
-	headerParams["Vericred-Api-Key"] = a.Configuration.GetAPIKeyWithPrefix("Vericred-Api-Key")
-
+	localVarHeaderParams["Vericred-Api-Key"] = a.Configuration.GetAPIKeyWithPrefix("Vericred-Api-Key")
 	// add default headers if any
 	for key := range a.Configuration.DefaultHeader {
-		headerParams[key] = a.Configuration.DefaultHeader[key]
+		localVarHeaderParams[key] = a.Configuration.DefaultHeader[key]
 	}
-		queryParams.Add("zipPrefix", a.Configuration.APIClient.ParameterToString(zipPrefix, ""))
+		localVarQueryParams.Add("zip_prefix", a.Configuration.APIClient.ParameterToString(zipPrefix, ""))
 	
 
 	// to determine the Content-Type header
@@ -199,7 +189,7 @@ func (a ZipCountiesApi) GetZipCounties(zipPrefix string) (*ZipCountyResponse, *A
 	// set Content-Type header
 	localVarHttpContentType := a.Configuration.APIClient.SelectHeaderContentType(localVarHttpContentTypes)
 	if localVarHttpContentType != "" {
-		headerParams["Content-Type"] = localVarHttpContentType
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
 	}
 	// to determine the Accept header
 	localVarHttpHeaderAccepts := []string{
@@ -208,14 +198,15 @@ func (a ZipCountiesApi) GetZipCounties(zipPrefix string) (*ZipCountyResponse, *A
 	// set Accept header
 	localVarHttpHeaderAccept := a.Configuration.APIClient.SelectHeaderAccept(localVarHttpHeaderAccepts)
 	if localVarHttpHeaderAccept != "" {
-		headerParams["Accept"] = localVarHttpHeaderAccept
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
+
 	var successPayload = new(ZipCountyResponse)
-	httpResponse, err := a.Configuration.APIClient.CallAPI(path, httpMethod, postBody, headerParams, queryParams, formParams, fileName, fileBytes)
+	localVarHttpResponse, err := a.Configuration.APIClient.CallAPI(localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return successPayload, NewAPIResponse(httpResponse.RawResponse), err
+		return successPayload, NewAPIResponse(localVarHttpResponse.RawResponse), err
 	}
-	err = json.Unmarshal(httpResponse.Body(), &successPayload)
-	return successPayload, NewAPIResponse(httpResponse.RawResponse), err
+	err = json.Unmarshal(localVarHttpResponse.Body(), &successPayload)
+	return successPayload, NewAPIResponse(localVarHttpResponse.RawResponse), err
 }
 
