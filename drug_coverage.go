@@ -137,8 +137,8 @@ type DrugCoverage struct {
 	// NDC package code
 	DrugPackageId string `json:"drug_package_id,omitempty"`
 
-	// Tier Name
-	Tier string `json:"tier,omitempty"`
+	// Med ID
+	MedId int32 `json:"med_id,omitempty"`
 
 	// Quantity limit exists
 	QuantityLimit bool `json:"quantity_limit,omitempty"`
@@ -148,4 +148,7 @@ type DrugCoverage struct {
 
 	// Step Treatment required
 	StepTherapy bool `json:"step_therapy,omitempty"`
+
+	// Tier Name
+	Tier string `json:"tier,omitempty"`
 }

@@ -21,7 +21,7 @@ Drug Coverages are the specific tier level, quantity limit, prior authorization 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ndcPackageCode** | **string**| NDC package code | 
- **audience** | **string**| Two-character state code | 
+ **audience** | **string**| Plan Audience (individual or small_group) | 
  **stateCode** | **string**| Two-character state code | 
 
 ### Return type

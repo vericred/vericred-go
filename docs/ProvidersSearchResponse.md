@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Meta** | [**Meta**](Meta.md) | Metadata for query | [optional] [default to null]
+**Meta** | [**Meta**](Meta.md) | Meta-data | [optional] [default to null]
 **Providers** | [**[]Provider**](Provider.md) | Providers that fit the requested criterion. | [optional] [default to null]
 **States** | [**[]State**](State.md) | States that fit the requested criterion. | [optional] [default to null]
 

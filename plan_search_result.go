@@ -134,7 +134,7 @@ type PlanSearchResult struct {
 	// Does the plan provide dental coverage for adults?
 	AdultDental bool `json:"adult_dental,omitempty"`
 
-	// 
+	// True if the plan allows dependents up to age 29
 	Age29Rider bool `json:"age29_rider,omitempty"`
 
 	// Benefits string for ambulance coverage
@@ -170,7 +170,7 @@ type PlanSearchResult struct {
 	// Alternate name for the Plan
 	DisplayName string `json:"display_name,omitempty"`
 
-	// Is this a domestic plan?
+	// True if plan does not cover domestic partners
 	DpRider bool `json:"dp_rider,omitempty"`
 
 	// Link to the summary of drug benefits for the plan
@@ -197,7 +197,7 @@ type PlanSearchResult struct {
 	// Maximum out-of-pocket when a family is on the plan
 	FamilyMedicalMoop string `json:"family_medical_moop,omitempty"`
 
-	// Is this a family plan?
+	// True if plan does not cover family planning
 	FpRider bool `json:"fp_rider,omitempty"`
 
 	// Cost for generic drugs
@@ -310,6 +310,9 @@ type PlanSearchResult struct {
 
 	// Cumulative premium amount
 	Premium float32 `json:"premium,omitempty"`
+
+	// Source of the base pricing data
+	PremiumSource string `json:"premium_source,omitempty"`
 
 	// Cost under the plan to visit a Primary Care Physician
 	PrimaryCarePhysician string `json:"primary_care_physician,omitempty"`

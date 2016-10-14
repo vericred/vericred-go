@@ -131,7 +131,7 @@ package vericredclient
 
 type ProvidersSearchResponse struct {
 
-	// Metadata for query
+	// Meta-data
 	Meta Meta `json:"meta,omitempty"`
 
 	// Providers that fit the requested criterion.

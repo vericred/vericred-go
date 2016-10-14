@@ -129,7 +129,7 @@ The response would be
 
 package vericredclient
 
-type Provider struct {
+type ProviderDetails struct {
 
 	// Is this provider accepting patients with a change of insurance?
 	AcceptingChangeOfPayorPatients bool `json:"accepting_change_of_payor_patients,omitempty"`
@@ -214,4 +214,7 @@ type Provider struct {
 
 	// Postal code for the provider's address (e.g. 11215)
 	ZipCode string `json:"zip_code,omitempty"`
+
+	// List of HIOS ids for this provider
+	HiosIds []string `json:"hios_ids,omitempty"`
 }

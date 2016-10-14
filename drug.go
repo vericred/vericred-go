@@ -134,6 +134,9 @@ type Drug struct {
 	// National Drug Code ID
 	Id string `json:"id,omitempty"`
 
+	// Active Ingredient Strength information
+	ActiveIngredientStrength string `json:"active_ingredient_strength,omitempty"`
+
 	// Proprietary name of drug
 	ProprietaryName string `json:"proprietary_name,omitempty"`
 

@@ -136,4 +136,7 @@ type DrugPackage struct {
 
 	// Package description
 	Description string `json:"description,omitempty"`
+
+	// Med ID
+	MedId int32 `json:"med_id,omitempty"`
 }

@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Meta** | [**Meta**](Meta.md) | Metadata for query | [optional] [default to null]
+**Meta** | [**Meta**](Meta.md) | Meta-data | [optional] [default to null]
 **Drugs** | [**[]Drug**](Drug.md) | Drugs found in query | [optional] [default to null]
 **DrugPackages** | [**[]DrugPackage**](DrugPackage.md) | DrugPackages | [optional] [default to null]
 

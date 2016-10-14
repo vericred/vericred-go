@@ -133,4 +133,7 @@ type RequestPlanFindDrugPackage struct {
 
 	// National Drug Code ID (Package)
 	Id string `json:"id,omitempty"`
+
+	// Med ID, mutually exclusive with id
+	MedId int32 `json:"med_id,omitempty"`
 }

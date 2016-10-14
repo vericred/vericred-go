@@ -131,7 +131,7 @@ package vericredclient
 
 type NetworkSearchResponse struct {
 
-	// Metadata for query
+	// Meta-data
 	Meta Meta `json:"meta,omitempty"`
 
 	// Networks that fit the requested criterion.

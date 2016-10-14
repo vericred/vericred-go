@@ -167,4 +167,10 @@ type Pricing struct {
 
 	// Foreign key to rating areas
 	RatingAreaId string `json:"rating_area_id,omitempty"`
+
+	// Where was this pricing data extracted from?
+	PremiumSource string `json:"premium_source,omitempty"`
+
+	// Time when pricing was last updated
+	UpdatedAt string `json:"updated_at,omitempty"`
 }

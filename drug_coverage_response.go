@@ -131,7 +131,7 @@ package vericredclient
 
 type DrugCoverageResponse struct {
 
-	// Metadata for query
+	// Meta-data
 	Meta Meta `json:"meta,omitempty"`
 
 	// DrugCoverage search results
