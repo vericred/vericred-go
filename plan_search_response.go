@@ -131,12 +131,12 @@ package vericredclient
 
 type PlanSearchResponse struct {
 
-	// Metadata for query
+	// Meta-data
 	Meta Meta `json:"meta,omitempty"`
 
 	// Plan search results
 	Plans []Plan `json:"plans,omitempty"`
 
-	// null
-	Coverages []Drug `json:"coverages,omitempty"`
+	// Coverages associated with the plan.
+	Coverages []DrugCoverage `json:"coverages,omitempty"`
 }

@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **PremiumSingleAndSpouse** | **float32** | Person with spouse premium | [optional] [default to null]
 **PremiumSingleSmoker** | **float32** | Premium for single smoker | [optional] [default to null]
 **RatingAreaId** | **string** | Foreign key to rating areas | [optional] [default to null]
+**PremiumSource** | **string** | Where was this pricing data extracted from? | [optional] [default to null]
+**UpdatedAt** | **string** | Time when pricing was last updated | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

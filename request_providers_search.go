@@ -140,6 +140,9 @@ type RequestProvidersSearch struct {
 	// Minimum search threshold to be included in the results
 	MinScore float32 `json:"min_score,omitempty"`
 
+	// List of Vericred network ids
+	NetworkIds []int32 `json:"network_ids,omitempty"`
+
 	// Page number
 	Page int32 `json:"page,omitempty"`
 

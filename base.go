@@ -131,6 +131,6 @@ package vericredclient
 
 type Base struct {
 
-	// Metadata for query
+	// Meta-data
 	Meta Meta `json:"meta,omitempty"`
 }

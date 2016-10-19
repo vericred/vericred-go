@@ -1,4 +1,4 @@
-# Provider
+# ProviderDetails
 
 ## Properties
 Name | Type | Description | Notes
@@ -31,6 +31,7 @@ Name | Type | Description | Notes
 **Title** | **string** | Professional title for the provider (e.g. Dr). | [optional] [default to null]
 **Type_** | **string** | Type of NPI number (individual provider vs organization). | [optional] [default to null]
 **ZipCode** | **string** | Postal code for the provider&#39;s address (e.g. 11215) | [optional] [default to null]
+**HiosIds** | **[]string** | List of HIOS ids for this provider | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
