@@ -217,32 +217,89 @@ space                     ::= /[ \t]/+
 package vericredclient
 
 import (
-	"time"
+	"net/url"
+	"encoding/json"
+	"fmt"
+	"strings"
 )
 
-type State struct {
-
-	// Primary Key of State
-	Id int32 `json:"id,omitempty"`
-
-	// Name of state
-	Name string `json:"name,omitempty"`
-
-	// 2 letter code for state
-	Code string `json:"code,omitempty"`
-
-	// National FIPs number
-	FipsNumber string `json:"fips_number,omitempty"`
-
-	// Last date this state is live for individuals
-	LastDateForIndividual time.Time `json:"last_date_for_individual,omitempty"`
-
-	// Last date this state is live for shop
-	LastDateForShop time.Time `json:"last_date_for_shop,omitempty"`
-
-	// Is this State available for businesses
-	LiveForBusiness bool `json:"live_for_business,omitempty"`
-
-	// Is this State available for individuals
-	LiveForConsumers bool `json:"live_for_consumers,omitempty"`
+type DrugCoveragesApi struct {
+	Configuration *Configuration
 }
+
+func NewDrugCoveragesApi() *DrugCoveragesApi {
+	configuration := NewConfiguration()
+	return &DrugCoveragesApi{
+		Configuration: configuration,
+	}
+}
+
+func NewDrugCoveragesApiWithBasePath(basePath string) *DrugCoveragesApi {
+	configuration := NewConfiguration()
+	configuration.BasePath = basePath
+
+	return &DrugCoveragesApi{
+		Configuration: configuration,
+	}
+}
+
+/**
+ * Search for DrugCoverages
+ * Drug Coverages are the specific tier level, quantity limit, prior authorization and step therapy for a given Drug/Plan combination. This endpoint returns all DrugCoverages for a given Drug.  #### Tiers   Possible values for tier:    | Tier                     | Description                                                                                                                                                                     |   | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |   | __generic__              | Unbranded drugs, with the same active ingredients as their brand-name equivalents, and generally available at a lower cost.                                                     |   | __preferred_brand__      | Brand-name drugs included on the health plan&#39;s formulary. Generally more expensive than generics, and less expensive than non-preferred drugs.                                  |   | __non_preferred_brand__  | Brand-name drugs not included on the health plan&#39;s formulary. These generally have a higher coinsurance.                                                                        |   | __specialty__            | Used to treat complex conditions like cancer. May require special handling or monitoring. May be generic or brand-name. Generally the most expensive drugs covered by a plan.   |   | __not_covered__          | Specifically excluded from the health plan.                                                                                                                                     |   | __not_listed__           | Neither included nor excluded from the health plan. Most plans provide some default level of coverage for unlisted drugs.                                                       |
+ *
+ * @param ndcPackageCode NDC package code
+ * @param audience Plan Audience (individual or small_group)
+ * @param stateCode Two-character state code
+ * @return *DrugCoverageResponse
+ */
+func (a DrugCoveragesApi) GetDrugCoverages(ndcPackageCode string, audience string, stateCode string) (*DrugCoverageResponse, *APIResponse, error) {
+
+	var localVarHttpMethod = "Get"
+	// create path and map variables
+	localVarPath := a.Configuration.BasePath + "/drug_packages/{ndc_package_code}/coverages"
+	localVarPath = strings.Replace(localVarPath, "{"+"ndc_package_code"+"}", fmt.Sprintf("%v", ndcPackageCode), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := make(map[string]string)
+	var localVarPostBody interface{}
+	var localVarFileName string
+	var localVarFileBytes []byte
+	// authentication '(Vericred-Api-Key)' required
+	// set key with prefix in header
+	localVarHeaderParams["Vericred-Api-Key"] = a.Configuration.GetAPIKeyWithPrefix("Vericred-Api-Key")
+	// add default headers if any
+	for key := range a.Configuration.DefaultHeader {
+		localVarHeaderParams[key] = a.Configuration.DefaultHeader[key]
+	}
+		localVarQueryParams.Add("audience", a.Configuration.APIClient.ParameterToString(audience, ""))
+			localVarQueryParams.Add("state_code", a.Configuration.APIClient.ParameterToString(stateCode, ""))
+	
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{  }
+
+	// set Content-Type header
+	localVarHttpContentType := a.Configuration.APIClient.SelectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{
+			}
+
+	// set Accept header
+	localVarHttpHeaderAccept := a.Configuration.APIClient.SelectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+
+	var successPayload = new(DrugCoverageResponse)
+	localVarHttpResponse, err := a.Configuration.APIClient.CallAPI(localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return successPayload, NewAPIResponse(localVarHttpResponse.RawResponse), err
+	}
+	err = json.Unmarshal(localVarHttpResponse.Body(), &successPayload)
+	return successPayload, NewAPIResponse(localVarHttpResponse.RawResponse), err
+}
+
